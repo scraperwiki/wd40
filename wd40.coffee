@@ -17,6 +17,8 @@ class wd40
   @fill: (selector, text, cb) ->
     browser.waitForElementByCss selector, 4000, ->
       browser.elementByCss selector, (err, element) ->
+        if err
+          return cb err, null
         element.clear (err) ->
           browser.type element, text, cb
 
