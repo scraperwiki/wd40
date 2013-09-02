@@ -15,5 +15,8 @@
   },
   "bugs": {
     "url": "https://github.com/scraperwiki/wd40/issues"
+  },
+  "dependencies": {
+    "wd": "~0.1.1"
   }
 }
