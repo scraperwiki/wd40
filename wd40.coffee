@@ -7,8 +7,7 @@ class wd40
       'chrome.switches': ['--disable-extensions']
     , (err) ->
       if err
-        console.warn err
-        console.warn "Is your Selenium server running? (see custard/README.md for instructions)"
+        console.warn "#{err.code}: Is your Selenium server running?"
       cb err
 
   @trueURL: (cb) ->
