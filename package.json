@@ -1,6 +1,6 @@
 {
   "name": "wd40",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Lubricates your passage to using Selenium and webdriver.",
   "main": "wd40.js",
   "scripts": {
