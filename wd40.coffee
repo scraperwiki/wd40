@@ -112,6 +112,21 @@ class wd40
             setTimeout poll, 200
     poll()
 
+  @waitForVisible: (element, callback) ->
+    endTime = Date.now() + 4000
+    poll = ->
+      browser.isVisible element, (err, visible) ->
+        if err
+          callback err
+        else if visible
+          callback null
+        else
+          if Date.now() > endTime
+            callback new Error("Element did not disappear")
+          else
+            setTimeout poll, 200
+    poll()
+
   @waitForInvisibleByCss: (selector, callback) ->
     endTime = Date.now() + 4000
     poll = ->
@@ -119,6 +134,21 @@ class wd40
         if err
           callback err
         else if not visible
+          callback null
+        else
+          if Date.now() > endTime
+            callback new Error("Element did not disappear")
+          else
+            setTimeout poll, 200
+    poll()
+
+  @waitForVisibleByCss: (selector, callback) ->
+    endTime = Date.now() + 4000
+    poll = ->
+      browser.isVisible 'css selector', selector, (err, visible) ->
+        if err
+          callback err
+        else if visible
           callback null
         else
           if Date.now() > endTime
