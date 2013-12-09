@@ -27,7 +27,7 @@ class wd40
         browser.clear element, cb
 
   @click: (selector, cb) ->
-    browser.waitForVisibleByCss selector, 4000, ->
+    wd40.waitForVisibleByCss selector, ->
       browser.elementByCss selector, (err, element) ->
         element.click cb
 
