@@ -158,5 +158,9 @@ class wd40
     poll()
 
 
-exports.browser = browser = wd.remote()
+# wd.remote works fine without defining a host and port
+# but you can override them with these environment variables
+seleniumHost = process.env.SELENIUM_HOST
+seleniumPort = process.env.SELENIUM_PORT
+exports.browser = browser = wd.remote seleniumHost, seleniumPort
 exports.wd40 = wd40
