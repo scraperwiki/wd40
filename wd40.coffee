@@ -4,29 +4,34 @@ doInit = (cb) ->
   browser.init
     browserName: process.env.BROWSER ? 'chrome'
     'chrome.switches': ['--disable-extensions']
-  , (err) ->
-    if err
-      console.warn "#{err.code}: Is your Selenium server running?"
-    cb err
+  , cb
 
 class wd40
   @init: (cb) ->
     browser.sessions (err, sessions) ->
+      if err
+        cb err
+        return
+
       if sessions.length == 0
+        # No sessions running, start a new one.
         doInit cb
         return
 
       console.log "wd40: Attaching to existing browser session"
+
       browser.attach sessions[0].id, (err) ->
         if err
           console.warn "wd40: Couldn't attach to existing session, try restarting selenium"
           return cb err
+
         browser.windowName (err) ->
           if err
             console.warn "wd40: Couldn't attach to existing session, reinitializing"
             browser.quit ->
               doInit cb
             return
+
           cb err
 
   @trueURL: (cb) ->
